@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const app = express();
 const mongoose = require('mongoose');
 
@@ -12,8 +14,21 @@ mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${proc
   error => { console.log('Error while connecting to database'); }
 );
 
+// use body-parser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+app.use(cookieParser()); // use cookie-parser
+// initialize express-session
+app.use(session({
+  key: 'ss_id',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    expires: 60 * 10 * 1000, // 10 mins
+  }
+}));
 
 // routes handlers
 app.use('/user', userRoutes);
