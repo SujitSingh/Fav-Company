@@ -1,7 +1,6 @@
 // logics for all "/user" routes
 const bcrypt = require('bcrypt');
 
-// const authCookie = require('../middleware/auth-cookie');
 const User = require('../models/userModel'); // User schema
 
 function findUser(userName) {
@@ -83,9 +82,6 @@ exports.userLogin = (req, res, next) => {
             });
           }
           if(result) { // correct password
-            // add cookie details
-            // res = authCookie.setCookieToken(res, { userName });
-
             res.status(200).json({
               message: 'Successful login'
             });
