@@ -24,7 +24,7 @@ exports.setCookieToken = (res, partialPayload) => {
     ...partialPayload,
     date: Date.now()
   };
-  const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+  const token = jwt.sign(payload, process.env.SESSION_SECRET);
   res.cookie(cookieName, token, {
     maxAge: 60 * 60, // 1 hour
     httpOnly: true,
@@ -36,7 +36,7 @@ exports.setCookieToken = (res, partialPayload) => {
 
 exports.validateCookie = (req, res, next) => {
   const token = req.cookies[cookieName];
-  const decode = jwt.verify(token, process.env.TOKEN_SECRET);
+  const decode = jwt.verify(token, process.env.SESSION_SECRET);
   console.log(decode);
   next();
 }

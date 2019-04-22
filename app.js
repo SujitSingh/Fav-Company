@@ -9,7 +9,8 @@ const mongoose = require('mongoose');
 // available routes
 const userRoutes = require('./api/routes/user');
 
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_PATH}`).then(
+mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_PATH}`, 
+  { useNewUrlParser: true }).then(
   succes => { console.log('Database connected'); },
   error => { console.log('Error while connecting to database'); }
 );
