@@ -1,0 +1,65 @@
+.page-wrap {
+  min-height: 100vh;
+  background: linear-gradient(#1289A7, #5758BB);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-area {
+  width: 40%;
+  max-width: 300px;
+  min-width: 250px;
+  background: rgba(#fff, 0.7);
+  border-radius: 4px;
+  padding: 10px 2%;
+}
+
+::ng-deep {
+  $success: #28a745;
+
+  .form-title {
+    font-size: 18px;
+    margin: 10px 0 5px;
+  }
+
+  form {
+    .form-group {
+      margin: 5px 0;
+
+      .error {
+        color: red;
+        font-size: 12px;
+        height: 15px;
+        margin: 0 0 2px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 5px 10px;
+        border: 1px solid #aaa;
+      }
+
+      button {
+        width: 100%;
+        font-size: 16px;
+        padding: 5px 10px;
+        background: $success;
+        border: 1px solid darken($color: $success, $amount: 5);
+        color: #222;
+      }
+
+      &.submit-action {
+        margin-top: 20px;
+      }
+    }
+  }
+  .extra-actions {
+    margin: 15px 0;
+    .signup {
+      font-size: 14px;
+      color: #444;
+    }
+  }
+}
