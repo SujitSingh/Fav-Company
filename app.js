@@ -8,13 +8,17 @@ const mongoose = require('mongoose');
 // available routes
 const userRoutes = require('./api/routes/user');
 
-mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_PATH}`, 
+mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}/${process.env.MONGO_DB_NAME}`, 
   { 
     useNewUrlParser: true, 
     useCreateIndex: true 
   }).then(
-  succes => { console.log('Database connected'); },
-  error => { console.log('Error while connecting to database'); }
+  succes => {
+    console.log('Database connected');
+  },
+  error => {
+    console.log('Error while connecting to database');
+  }
 );
 
 // use body-parser
