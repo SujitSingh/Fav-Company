@@ -1,0 +1,11 @@
+{
+  "env": {
+    "NODE_ENV": "development",
+    "PORT": 3300,
+    "SESSION_SECRET": "some-session-secret",
+    "MONGO_HOST": "localhost:27017",
+    "MONGO_DB_NAME": "fav_company",
+    "MONGO_USER": "root",
+    "MONGO_PASS": "passw0rd"
+  }
+}
