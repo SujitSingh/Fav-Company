@@ -4,6 +4,8 @@ const session = require('express-session');
 
 const app = express();
 
+const userRoutes = require('./api/routers/userRoutes');
+
 mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}/${process.env.MONGO_DB_NAME}`,
   {
     useNewUrlParser: true,
@@ -27,5 +29,19 @@ app.use(session({
     maxAge: 60 * 10 * 1000, // 10 mins
   }
 }));
+app.use(express.json())
+
+// route handlers
+app.use('/api/user', userRoutes);
+
+// final error handler
+app.use((error, req, res, next) => {
+  error.statusCode = error.statusCode || 500;
+  res.status(error.statusCode).send({
+    error: {
+      message: error.message
+    }
+  });
+});
 
 module.exports = app;
