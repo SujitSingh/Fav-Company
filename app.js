@@ -5,6 +5,7 @@ const session = require('express-session');
 const app = express();
 
 const userRoutes = require('./api/routers/userRoutes');
+const companyRoutes = require('./api/routers/companyRoutes');
 
 mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}/${process.env.MONGO_DB_NAME}`,
   {
@@ -33,6 +34,7 @@ app.use(express.json())
 
 // route handlers
 app.use('/api/user', userRoutes);
+app.use('/api/company', companyRoutes);
 
 // final error handler
 app.use((error, req, res, next) => {

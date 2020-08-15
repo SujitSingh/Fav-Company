@@ -1,6 +1,25 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
 
+exports.getUserDetails = async (req, res, next) => {
+  const userId = req.params.userId;
+
+  try {
+    const user = await User.findById(userId)
+                            .select('-password')   // exclude "password"
+                            .populate('favCompanies');
+    if (!user) {
+      throw new Error('User details not found');
+    }
+    // send user details
+    return res.send({
+      ...user.toObject()
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.userSignup = async (req, res, next) => {
   const name = req.body.name,
         email = req.body.email,
@@ -21,9 +40,15 @@ exports.userSignup = async (req, res, next) => {
       password: hash
     });
 
-    await user.save();
-    res.send({
-      message: 'User created'
+    const createdUser = await user.save();
+    const userObj = createdUser.toObject();
+    delete userObj.password; // remove "password"
+
+    return res.send({
+      message: 'User created',
+      user: {
+        ...userObj
+      }
     });
   } catch (error) {
     next(error);
@@ -39,7 +64,8 @@ exports.userLogin = async (req, res, next) => {
 
   try {
     // find user
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email })
+                          .select('+password'); // include "password"
     if (!user) {
       throw invalidAccess;
     }
@@ -50,8 +76,10 @@ exports.userLogin = async (req, res, next) => {
       throw invalidAccess;
     }
     // email and password matched
-    res.send({
-      message: 'User logged in successfully'
+    const userObj = user.toObject();
+    delete userObj.password; // remove "password"
+    return res.send({
+      ...userObj
     });
   } catch (error) {
     next(error);
