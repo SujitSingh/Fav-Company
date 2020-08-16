@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const session = require('express-session');
 
 const app = express();
@@ -7,19 +6,7 @@ const app = express();
 const userRoutes = require('./api/routers/userRoutes');
 const companyRoutes = require('./api/routers/companyRoutes');
 
-mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}/${process.env.MONGO_DB_NAME}`,
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true
-  },
-  success => {
-    console.log('Database connected');
-  },
-  error => {
-    console.log('Failed to connect database')
-  }
-);
-
+console.log('process.env.SESSION_SECRET', process.env.SESSION_SECRET);
 // initialize express-session
 app.use(session({
   key: 'ss_id',
