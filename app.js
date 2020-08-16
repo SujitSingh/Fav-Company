@@ -6,7 +6,6 @@ const app = express();
 const userRoutes = require('./api/routers/userRoutes');
 const companyRoutes = require('./api/routers/companyRoutes');
 
-console.log('process.env.SESSION_SECRET', process.env.SESSION_SECRET);
 // initialize express-session
 app.use(session({
   key: 'ss_id',

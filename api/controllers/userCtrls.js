@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
+const jwtService = require('../services/jwt');
 
 exports.getUserDetails = async (req, res, next) => {
   const userId = req.params.userId;
@@ -78,7 +79,10 @@ exports.userLogin = async (req, res, next) => {
     // email and password matched
     const userObj = user.toObject();
     delete userObj.password; // remove "password"
+    // generate access tokens
+    const token = await jwtService.generateJwtToken({ id: userObj._id, email: userObj.email });
     return res.send({
+      token,
       ...userObj
     });
   } catch (error) {
