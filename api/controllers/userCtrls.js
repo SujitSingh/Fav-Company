@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
+const Company = require('../models/companyModel');
 const jwtService = require('../services/jwt');
 
 exports.getUserDetails = async (req, res, next) => {
@@ -84,6 +85,71 @@ exports.userLogin = async (req, res, next) => {
     return res.send({
       token,
       ...userObj
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.addCompanyAsFavourite = async (req, res, next) => {
+  const userId = req.params.userId,
+        companyId = req.params.companyId;
+
+  const notFoundError = new Error('');
+  notFoundError.statusCode = 404;
+
+  try {
+    const company = await Company.findById(companyId);
+    if (!company) {
+      notFoundError.message = 'Company not found';
+      throw notFoundError;
+    }
+    // find user details
+    const user = await User.findById(userId);
+    if (!user) {
+      notFoundError.message = 'User not found';
+      throw notFoundError;
+    }
+    // add company id to user's object if not already present
+    if (user.favCompanies.indexOf(companyId) === -1) {
+      user.favCompanies.push(companyId);
+      await user.save(); // save user changes
+    }
+    return res.send({
+      message: 'Added company to favourite list'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.removeCompanyFromFavourite = async (req, res, next) => {
+  const userId = req.params.userId,
+        companyId = req.params.companyId;
+
+  const notFoundError = new Error('');
+  notFoundError.statusCode = 404;
+
+  try {
+    const company = await Company.findById(companyId);
+    if (!company) {
+      notFoundError.message = 'Company not found';
+      throw notFoundError;
+    }
+    // find user details
+    const user = await User.findById(userId);
+    if (!user) {
+      notFoundError.message = 'User not found';
+      throw notFoundError;
+    }
+    // remove company id to user's object
+    user.favCompanies = user.favCompanies.filter(favCompanyId => {
+      return favCompanyId !== companyId;
+    });
+
+    await user.save(); // save user changes
+    return res.send({
+      message: 'Removed company from favourite list'
     });
   } catch (error) {
     next(error);
