@@ -1,0 +1,32 @@
+<div class="row container form-card">
+  <div class="col s12">
+    <div class="card">
+      <form #signupForm="ngForm" (ngSubmit)="signUp()">
+        <div class="card-content">
+          <div class="card-title">Sign Up</div>
+          <div class="input-field">
+            <label for="name" class="active">Name</label>
+            <input id="name" [(ngModel)]="signupObj.name" name="name" type="text" placeholder="Name" required>
+          </div>
+          <div class="input-field">
+            <label for="email" class="active">Email</label>
+            <input id="email" [(ngModel)]="signupObj.email" name="email" type="email" placeholder="Email" required>
+          </div>
+          <div class="input-field">
+            <label for="password" class="active">Password</label>
+            <input id="password" [(ngModel)]="signupObj.password" name="password" type="password" placeholder="Password" required>
+          </div>
+          <div class="input-field">
+            <label for="rePassword" class="active">Re-Enter Password</label>
+            <input id="rePassword" [(ngModel)]="signupObj.rePassword" name="rePassword" type="password" placeholder="Re-Enter Password" required>
+          </div>
+          <div class="error red-text" *ngIf="signupObj.errorMsg">{{signupObj.errorMsg}}</div>
+        </div>
+        <div class="card-action">
+          <button type="submit" class="waves-effect waves-light btn" [disabled]="!signupForm.form.valid">Login</button>
+        </div>
+      </form>
+    </div>
+    <p>Already have an account? <a routerLink="/login">Login</a></p>
+  </div>
+</div>
