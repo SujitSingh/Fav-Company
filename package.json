@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "angular": "cd client-apps/ng-fav-company && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sujit",
