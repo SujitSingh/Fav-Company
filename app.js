@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const cors = require('cors');
 
 const app = express();
 
@@ -16,7 +17,11 @@ app.use(session({
     maxAge: 60 * 10 * 1000, // 10 mins
   }
 }));
-app.use(express.json())
+app.use(express.json());
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+}));
 
 // route handlers
 app.use('/api/user', userRoutes);
