@@ -15,7 +15,11 @@ export class LoginComponent implements OnInit {
     errorMsg: ''
   };
 
-  constructor(private authSrvc: AuthService, private router: Router) { }
+  constructor(private authSrvc: AuthService, private router: Router) {
+    if (this.authSrvc.getLoggedUser()) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   ngOnInit(): void { }
 
@@ -29,10 +33,15 @@ export class LoginComponent implements OnInit {
     this.authSrvc.logIn(loginObj).subscribe(
       login => {
         this.authSrvc.storeLoggedUser(login, rememberLogin);
+        this.navigateToHome();
       },
       error => {
         this.loginObj.errorMsg = error.error.message || 'Login failed';
       }
     );
+  };
+
+  navigateToHome() {
+    this.router.navigate(['home']);
   };
 }
