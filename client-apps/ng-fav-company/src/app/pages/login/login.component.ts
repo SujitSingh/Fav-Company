@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     };
     this.authSrvc.logIn(loginObj).subscribe(
       login => {
-        console.log(login);
+        this.authSrvc.storeLoggedUser(login, rememberLogin);
       },
       error => {
         this.loginObj.errorMsg = error.error.message || 'Login failed';

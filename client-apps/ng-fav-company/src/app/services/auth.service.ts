@@ -24,6 +24,31 @@ export class AuthService {
     return this.http.post(api, signUpObj);
   };
 
+  storeLoggedUser(loginObj, rememberUser) {
+    // store details of logged user
+    if (rememberUser) {
+      // in localStorage
+      localStorage.setItem(this.loggedUserKey, JSON.stringify(loginObj));
+    } else  {
+      // in sessionStorage
+      sessionStorage.setItem(this.loggedUserKey, JSON.stringify(loginObj));
+    }
+    this.loggedUser.next(loginObj);
+  };
+
+  getLoggedUser(): User {
+    if (this.loggedUser.value) { return this.loggedUser.getValue(); }
+    let userDetails: User;
+    // check in localStorage
+    userDetails = JSON.parse(localStorage.getItem(this.loggedUserKey));
+    if (!userDetails) {
+      // check in sessionStorage
+      userDetails = JSON.parse(sessionStorage.getItem(this.loggedUserKey));
+    }
+    if (userDetails) { this.loggedUser.next(userDetails); }
+    return this.loggedUser.getValue();
+  };
+
   logoutUser() {
     this.loggedUser.next(null);
     this.clearStorages();
