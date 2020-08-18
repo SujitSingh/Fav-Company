@@ -8,8 +8,8 @@ exports.getUserDetails = async (req, res, next) => {
 
   try {
     const user = await User.findById(userId)
-                            .select('-password')   // exclude "password"
-                            .populate('favCompanies');
+                          .select('-password')   // exclude "password"
+                          .populate('favCompanies');
     if (!user) {
       throw new Error('User details not found');
     }
@@ -67,7 +67,7 @@ exports.userLogin = async (req, res, next) => {
   try {
     // find user
     const user = await User.findOne({ email })
-                          .select('+password'); // include "password"
+                          .select('+password -favCompanies'); // include "password" exclude "favCompanies"
     if (!user) {
       throw invalidAccess;
     }
