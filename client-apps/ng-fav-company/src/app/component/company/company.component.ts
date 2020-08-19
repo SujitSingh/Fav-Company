@@ -12,6 +12,8 @@ export class CompanyComponent implements OnInit {
   @Input() userId: String;
   @Input() adminControl: Boolean;
   @Output() onRemove = new EventEmitter<{}>();
+  @Output() onFavAdd = new EventEmitter<{}>();
+  @Output() onDelete = new EventEmitter<{}>();
 
   constructor(private companySrvc: CompanyService) { }
 
@@ -33,5 +35,39 @@ export class CompanyComponent implements OnInit {
       }
     );
   };
+
+  addCompanyToFav(userId, companyId) {
+    this.companySrvc.addCompanyToFav(userId, companyId).subscribe(
+      added => {
+        this.onFavAdd.emit({
+          added: true,
+          response: added
+        });
+      },
+      error => {
+        this.onFavAdd.emit({
+          added: false,
+          error: error.error && error.error.error || error
+        });
+      }
+    );
+  };
+
+  deleteCompany(companyId) {
+    this.companySrvc.deleteCompany(companyId).subscribe(
+      deletedRsp => {
+        this.onDelete.emit({
+          deleted: true,
+          response: deletedRsp
+        });
+      },
+      error => {
+        this.onDelete.emit({
+          deleted: false,
+          error: error.error && error.error.error || error
+        });
+      }
+    );
+  }
 
 }

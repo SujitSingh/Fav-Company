@@ -7,7 +7,7 @@ import { User, UserInfo } from '../../models/User';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: []
 })
 export class HomeComponent implements OnInit {
   user = <User>{};
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     );
   };
 
-  onRemoved(event) {
+  onRemove(event) {
     if (event && event.removed) {
       // removal was successful
       this.fetchUserInfo(); // reload user info

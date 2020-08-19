@@ -4,7 +4,7 @@
     <p>Name - {{user.name}}</p>
     <p>Joined on - {{userInfo.creationDate | date}}</p>
     
-    <h5>Favourite companies</h5>
+    <h5>Favourite companies (<a routerLink="/companies">all companies list</a>)</h5>
     <div class="row">
       <div class="col s12 m4" *ngFor="let company of userInfo.favCompanies">
         <app-company

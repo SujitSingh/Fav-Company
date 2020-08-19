@@ -1,0 +1,17 @@
+<div class="container">
+  <h5>Available companies (<a routerLink="/">your favourite companies</a>)</h5>
+  <p class="green-text" *ngIf="!loadingData && successMsg">{{successMsg}}</p>
+  <p class="error red-text" *ngIf="!loadingData && errorMsg">{{errorMsg}}</p>
+  
+  <div class="row">
+    <div class="col s12 m6" *ngFor="let company of companies">
+      <app-company
+        [company]="company"
+        [userId]="user._id"
+        [adminControl]="true"
+        (onFavAdd)="onAddToFav($event)"
+        (onDelete)="onDelete($event)">
+      </app-company>
+    </div>
+  </div>
+</div>

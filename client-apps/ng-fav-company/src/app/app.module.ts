@@ -12,6 +12,7 @@ import { TopNavComponent } from './component/top-nav/top-nav.component';
 import { TokenInterceptor } from './services/_helpers/token.interceptor';
 import { ErrorInterceptor } from './services/_helpers/error.interceptor';
 import { CompanyComponent } from './component/company/company.component';
+import { CompaniesComponent } from './pages/companies/companies.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CompanyComponent } from './component/company/company.component';
     SignupComponent,
     HomeComponent,
     TopNavComponent,
+    CompaniesComponent,
     CompanyComponent
   ],
   imports: [
