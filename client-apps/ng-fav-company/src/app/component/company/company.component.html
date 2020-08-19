@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">{{company.name}}</span>
+    <p>Registered on - {{company.registrationDate | date:'medium'}}</p>
+    <p>Company type - {{company.companyType}}</p>
+  </div>
+  <div class="card-action">
+    <ng-container *ngIf="adminControl; then adminActions; else userActions"></ng-container>
+  </div>
+</div>
+
+<ng-template #userActions>
+  <div class="center-align">
+    <a href="javascript:void(0)" class="orange-text text-darken-4" style="margin-right: 0;"
+      (click)="removeCompanyFromFav(userId, company._id)" title="Remove company from favourite list">
+      <i class="material-icons">close</i>
+    </a>
+  </div>
+</ng-template>
+
+<ng-template #adminActions>
+  <div class="row" style="margin-bottom: 0;">
+    <div class="col s6">
+      <a href="javascript:void(0)" class="green-text" style="margin-right: 0;"
+        (click)="addCompanyToFav(company._id)" title="Add company to favourite list">
+        <i class="material-icons">add</i>
+      </a>
+    </div>
+    <div class="col s6 right-align">
+      <a href="javascript:void(0)" class="red-text" style="margin-right: 0;"
+        (click)="deleteCompany(company._id)" title="Delete company from database">
+        <i class="material-icons">delete_forever</i>
+      </a>
+    </div>
+  </div>
+</ng-template>

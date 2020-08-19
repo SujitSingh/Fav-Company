@@ -6,18 +6,12 @@
     
     <h5>Favourite companies</h5>
     <div class="row">
-      <div class="card col s12 m4" *ngFor="let company of userInfo.favCompanies">
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{company.name}}</span>
-          <p>Registered on - {{company.registrationDate | date}}</p>
-          <p>Company type - {{company.companyType}}</p>
-        </div>
-        <div class="card-action center-align">
-          <a href="javascript:void(0)" class="error red-text" style="margin-right: 0;"
-            (click)="removeCompanyFromFav(company._id)">
-            <i class="material-icons" title="Remove company from favourite list">delete</i>
-          </a>
-        </div>
+      <div class="col s12 m4" *ngFor="let company of userInfo.favCompanies">
+        <app-company
+          [company]="company"
+          [userId]="userInfo._id"
+          (onRemove)="onRemove($event)">
+        </app-company>
       </div>
     </div>
   </ng-container>

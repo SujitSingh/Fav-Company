@@ -14,8 +14,4 @@ export class UserService {
     return this.http.get(api);
   };
 
-  removeCompanyFromFav(userId, companyId) {
-    const api = this.dataSrvc.apiRoot + `/api/user/${userId}/company/${companyId}/remove-from-fav`;
-    return this.http.post(api, {});
-  };
 }

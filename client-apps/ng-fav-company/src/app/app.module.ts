@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { TopNavComponent } from './component/top-nav/top-nav.component';
 import { TokenInterceptor } from './services/_helpers/token.interceptor';
 import { ErrorInterceptor } from './services/_helpers/error.interceptor';
+import { CompanyComponent } from './component/company/company.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ErrorInterceptor } from './services/_helpers/error.interceptor';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    TopNavComponent
+    TopNavComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,

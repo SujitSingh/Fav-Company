@@ -39,17 +39,14 @@ export class HomeComponent implements OnInit {
     );
   };
 
-  removeCompanyFromFav(companyId) {
-    this.errorMsg = '';
-    const userId = this.userInfo._id;
-    this.userSrvc.removeCompanyFromFav(userId, companyId).subscribe(
-      removed => {
-        this.fetchUserInfo();
-      },
-      error => {
-        this.errorMsg = error.message || error.error.message;
-      }
-    );
+  onRemoved(event) {
+    if (event && event.removed) {
+      // removal was successful
+      this.fetchUserInfo(); // reload user info
+    } else {
+      // failed to remove
+      this.errorMsg = event.error.message
+    }
   };
 
 }
