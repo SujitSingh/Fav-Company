@@ -1,1 +1,42 @@
-<p>home works!</p>
+<div class="container">
+  <ng-container *ngIf="!loadingData && !errorMsg">
+    <h5>User details</h5>
+    <p>Name - {{user.name}}</p>
+    <p>Joined on - {{userInfo.creationDate | date}}</p>
+    
+    <h5>Favourite companies</h5>
+    <div class="row">
+      <div class="card col s12 m4" *ngFor="let company of userInfo.favCompanies">
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">{{company.name}}</span>
+          <p>Registered on - {{company.registrationDate | date}}</p>
+          <p>Company type - {{company.companyType}}</p>
+        </div>
+        <div class="card-action center-align">
+          <a href="javascript:void(0)" class="error red-text" style="margin-right: 0;"
+            (click)="removeCompanyFromFav(company._id)">
+            <i class="material-icons" title="Remove company from favourite list">delete</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  
+  <p class="error red-text" *ngIf="!loadingData && errorMsg">{{errorMsg}}</p>
+  
+  <ng-container *ngIf="loadingData">
+    <div class="center-align">
+      <div class="preloader-wrapper active">
+        <div class="spinner-layer spinner-red-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

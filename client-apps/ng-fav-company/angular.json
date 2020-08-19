@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "../common/css/material-icon.css",
               "../common/css/materialize.min.css",
               "src/styles.scss"
             ],
