@@ -143,8 +143,8 @@ module.exports.removeCompanyFromFavourite = async (req, res, next) => {
       throw notFoundError;
     }
     // remove company id to user's object
-    user.favCompanies = user.favCompanies.filter(favCompanyId => {
-      return favCompanyId !== companyId;
+    user.favCompanies = user.favCompanies.filter(favCompany => {
+      return favCompany._id.toString() !== companyId;
     });
 
     await user.save(); // save user changes
