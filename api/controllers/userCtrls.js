@@ -91,7 +91,7 @@ exports.userLogin = async (req, res, next) => {
   }
 };
 
-module.exports.addCompanyAsFavourite = async (req, res, next) => {
+module.exports.addCompanyToFavourite = async (req, res, next) => {
   const userId = req.params.userId,
         companyId = req.params.companyId;
 

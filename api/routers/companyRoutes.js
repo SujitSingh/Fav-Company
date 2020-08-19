@@ -6,6 +6,6 @@ const authMiddleware = require('../middlewares/auth');
 
 router.get('/all', authMiddleware.checkAuthToken, companyCtrl.getAllCompanies);
 router.post('/add', authMiddleware.checkAuthToken, companyCtrl.registerCompany);
-router.delete('/remove/:companyId', authMiddleware.checkAuthToken, companyCtrl.removeCompany);
+router.delete('/:companyId/remove', authMiddleware.checkAuthToken, companyCtrl.removeCompany);
 
 module.exports = router;

@@ -7,9 +7,9 @@ const authMiddleware = require('../middlewares/auth');
 router.post('/signup', userCtrl.userSignup);
 router.post('/login', userCtrl.userLogin);
 router.get('/:userId', authMiddleware.checkAuthToken, userCtrl.getUserDetails);
-router.post('/:userId/company/:companyId/add-as-fav',
+router.post('/:userId/company/:companyId/add-to-fav',
   authMiddleware.checkAuthToken,
-  userCtrl.addCompanyAsFavourite
+  userCtrl.addCompanyToFavourite
 );
 router.post('/:userId/company/:companyId/remove-from-fav',
   authMiddleware.checkAuthToken,
