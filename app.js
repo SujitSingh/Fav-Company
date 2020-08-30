@@ -7,6 +7,8 @@ const app = express();
 const userRoutes = require('./api/routers/userRoutes');
 const companyRoutes = require('./api/routers/companyRoutes');
 
+require('dotenv').config(); // require environment variables
+
 // initialize express-session
 app.use(session({
   key: 'ss_id',
