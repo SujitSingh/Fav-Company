@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const appConfig = require('../utils/config.js');
 
 module.exports.checkAuthToken = (req, res, next) => {
   const authHeader = req.headers.authorization,
@@ -13,7 +14,7 @@ module.exports.checkAuthToken = (req, res, next) => {
   }
 
   // check for token validation
-  jwt.verify(token, process.env.TOKEN_SECRET, (error, decoded) => {
+  jwt.verify(token, appConfig.TOKEN_SECRET, (error, decoded) => {
     if (error || !decoded || (userId && userId !== decoded.id)) {
       // decoding failed or worong user
       if (error) { error.statusCode = 401; }

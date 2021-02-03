@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
+const appConfig = require('./api/utils/config.js');
 
 const app = express();
 
@@ -12,7 +13,7 @@ require('dotenv').config(); // require environment variables
 // initialize express-session
 app.use(session({
   key: 'ss_id',
-  secret: process.env.SESSION_SECRET,
+  secret: appConfig.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
