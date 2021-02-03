@@ -1,7 +1,7 @@
 const http = require('http');
 const mongoose = require('mongoose');
 const app = require('./app');
-const PORT = process.env.PORT || 3300;
+const PORT = parseInt(process.env.PORT || 3300);
 
 const server = http.createServer(app);
 

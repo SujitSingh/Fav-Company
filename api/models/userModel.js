@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true, select: false },
   creationDate: { type: Date, default: Date.now },
   favCompanies: [{ type: mongoose.Types.ObjectId, ref: 'Company' }]
-});
+}, { versionKey: false });
 
 const User = mongoose.model('User', userSchema, 'User');
 
